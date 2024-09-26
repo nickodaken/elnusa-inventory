@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('adjustment_stocks', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('bill_no');
             $table->integer('user_id');
             $table->text('remark')->nullable();

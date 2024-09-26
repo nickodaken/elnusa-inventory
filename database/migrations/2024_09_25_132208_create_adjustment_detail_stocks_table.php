@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('adjustment_detail_stocks', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('adjustment_stock_id')->nullable();
-            $table->string('barang_id');
+            $table->integer('barang_id');
             $table->integer('stock_existing');
             $table->integer('stock_actual');
             $table->text('remark')->nullable();

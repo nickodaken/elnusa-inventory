@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stock_outs', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('bill_no')->unique();
             $table->integer('customer_id');
             $table->integer('user_id');
