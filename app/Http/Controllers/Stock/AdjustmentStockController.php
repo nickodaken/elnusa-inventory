@@ -21,7 +21,10 @@ class AdjustmentStockController extends Controller
 
         $datas = [];
         if ($startDate) {
-            $datas = AdjustmentStock::whereBetween('created_at', [$startDate, $endDate])->get();
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            $datas = AdjustmentStock::whereBetween('created_at', [$from, $to])->get();
         } else {
             $datas = AdjustmentStock::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
         }
@@ -77,16 +80,13 @@ class AdjustmentStockController extends Controller
         DB::beginTransaction();
         try {
             if ($carts->count() > 0) {
-                // Available alpha caracters
-                $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-                // generate a pin based on 2 * 7 digits + a random character
-                $pin = mt_rand(1000000, 9999999)
-                    . mt_rand(1000000, 9999999)
-                    . $characters[rand(0, strlen($characters) - 1)];
+                $totalRFC = sprintf("%03d", AdjustmentStock::whereYear('created_at', Carbon::now())->count() + 1);
+                $month = Carbon::now()->format('m');
+                $year = Carbon::now()->format('Y');
+                $billNo = $totalRFC . '/' . 'StockIn' . '/' . $month . '/' . $year;
 
                 $data = new AdjustmentStock();
-                $data->bill_no = str_shuffle($pin);
+                $data->bill_no = $billNo;
                 $data->user_id = Auth::id();
                 $data->remark = request()->remark;
                 $data->save();

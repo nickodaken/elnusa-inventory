@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"></h5>
-                        <form class="row g-3 mb-4" accept="{{ route('report.detail', $data->id) }}" method="GET">
+                        <form class="row g-3 mb-4" action="{{ route('report.detail', $data->id) }}" method="GET">
                             <div class="col-6">
                                 <label class="form-label">Tanggal Awal</label>
                                 <input type="date" class="form-control" name="startDate"

@@ -146,7 +146,11 @@ Route::middleware('auth')->group(function () {
         * Report
         */
         Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+        Route::get('/report/masuk', [ReportController::class, 'stockIn'])->name('report.stockIn');
+        Route::get('/report/Keluar', [ReportController::class, 'stockOut'])->name('report.stockOut');
+        Route::get('/report/penyesuaian', [ReportController::class, 'adjustmentStock'])->name('report.adjustmentStock');
         Route::get('/report/{id}', [ReportController::class, 'detail'])->name('report.detail');
+
 
         /*
         * Crirical Stock

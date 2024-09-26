@@ -21,7 +21,7 @@
                             @csrf
                             <div class="col-md-12">
                                 <label class="form-label">Barang</label>
-                                <select id="product" name="barang_id" class="form-control" required>
+                                <select id="product" name="barang_id" class="form-control select2" required>
                                     <option value="" disabled selected>Pilih</option>
                                     @foreach ($datas as $item)
                                         <option value="{{ $item->id }}">
@@ -148,6 +148,10 @@
                         '</option> ');
                 });
             });
+        });
+
+        $(document).ready(function() {
+            $('.select2').select2();
         });
     </script>
 @endsection

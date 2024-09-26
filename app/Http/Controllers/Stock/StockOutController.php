@@ -22,7 +22,10 @@ class StockOutController extends Controller
 
         $datas = [];
         if ($startDate) {
-            $datas = StockOut::whereBetween('created_at', [$startDate, $endDate])->get();
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            $datas = StockOut::whereBetween('created_at', [$from, $to])->get();
         } else {
             $datas = StockOut::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
         }
@@ -43,6 +46,7 @@ class StockOutController extends Controller
         $data = new StockOutDetail();
         $data->barang_id = request()->barang_id;
         $data->qty = request()->qty;
+        $data->do_number = request()->do_number;
         $data->user_id = Auth::id();
         $data->save();
 
@@ -76,16 +80,13 @@ class StockOutController extends Controller
         DB::beginTransaction();
         try {
             if ($carts->count() > 0) {
-                // Available alpha caracters
-                $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-                // generate a pin based on 2 * 7 digits + a random character
-                $pin = mt_rand(1000000, 9999999)
-                    . mt_rand(1000000, 9999999)
-                    . $characters[rand(0, strlen($characters) - 1)];
+                $totalRFC = sprintf("%03d", StockOut::whereYear('created_at', Carbon::now())->count() + 1);
+                $month = Carbon::now()->format('m');
+                $year = Carbon::now()->format('Y');
+                $billNo = $totalRFC . '/' . 'StockIn' . '/' . $month . '/' . $year;
 
                 $data = new StockOut();
-                $data->bill_no = str_shuffle($pin);
+                $data->bill_no = $billNo;
                 $data->customer_id = request()->customer_id;
                 $data->user_id = Auth::id();
                 $data->save();

@@ -21,7 +21,7 @@
                             @csrf
                             <div class="col-md-12">
                                 <label class="form-label">Barang</label>
-                                <select id="product" name="barang_id" class="form-control" required>
+                                <select id="product" name="barang_id" class="form-control select2" required>
                                     <option value="" disabled selected>Pilih</option>
                                     @foreach ($datas as $item)
                                         <option value="{{ $item->id }}">
@@ -46,6 +46,10 @@
                                 <label class="form-label">Jumlah</label>
                                 <input type="number" class="form-control" name="qty" value="1" required>
                             </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Nomor DO</label>
+                                <input type="text" class="form-control" name="do_number" required>
+                            </div>
 
                             <div class="text-end">
                                 <button type="submit" class="btn btn-outline-primary">Tambah</button>
@@ -64,6 +68,7 @@
                                     <tr>
                                         <th scope="col">Kode Barang</th>
                                         <th scope="col">Nama Barang</th>
+                                        <th scope="col">Nomor DO</th>
                                         <th scope="col" class="text-center">Stok</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Stok Aktual</th>
@@ -75,6 +80,7 @@
                                         <tr>
                                             <td>{{ $item->barang->code }}</td>
                                             <td>{{ $item->barang->name }}</td>
+                                            <td>{{ $item->do_number }}</td>
                                             <td class="text-center">{{ $item->barang->stock }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td class="text-center">{{ $item->barang->stock - $item->qty }}</td>
@@ -151,6 +157,10 @@
                         '</option> ');
                 });
             });
+        });
+
+        $(document).ready(function() {
+            $('.select2').select2();
         });
     </script>
 @endsection

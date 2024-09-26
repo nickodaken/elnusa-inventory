@@ -20,6 +20,23 @@
                     </a>
                 </h5>
 
+                <form class="row g-3 mb-4" action="{{ route('penyesuaian.stok.index') }}" method="GET">
+                    <div class="col-6">
+                        <label class="form-label">Tanggal Awal</label>
+                        <input type="date" class="form-control" name="startDate"
+                            value="{{ app('request')->input('startDate') }}" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Tanggal Akhir</label>
+                        <input type="date" class="form-control" name="endDate"
+                            value="{{ app('request')->input('endDate') }}" required>
+                    </div>
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="{{ route('masuk.index') }}" class="btn btn-secondary">Reset Filter</a>
+                    </div>
+                </form>
+
                 <!-- Table -->
                 <div class="table-responsive">
                     <table id="table" class="table table-borderless display nowrap" style="width:100%">

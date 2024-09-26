@@ -16,7 +16,8 @@ class StockOutDetail extends Model
         'stock_id',
         'barang_id',
         'qty',
-        'user_id'
+        'user_id',
+        'do_number'
     ];
 
     public function stock(): BelongsTo

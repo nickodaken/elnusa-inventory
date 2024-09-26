@@ -10,7 +10,7 @@ class CriticalStockController extends Controller
 {
     public function index()
     {
-        $datas = Barang::whereColumn('stock', '=', 'minimal_stock')->get();
+        $datas = Barang::whereColumn('stock', '<=', 'minimal_stock')->get();
         return view('pages.stock.criticalStock.index', compact('datas'));
     }
 }

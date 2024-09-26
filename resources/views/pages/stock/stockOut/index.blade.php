@@ -20,7 +20,7 @@
                     </a>
                 </h5>
 
-                <form class="row g-3 mb-4" accept="{{ route('keluar.index') }}" method="GET">
+                <form class="row g-3 mb-4" action="{{ route('keluar.index') }}" method="GET">
                     <div class="col-6">
                         <label class="form-label">Tanggal Awal</label>
                         <input type="date" class="form-control" name="startDate"
@@ -57,7 +57,6 @@
                                 <th scope="col">Pelanggan</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
-                                <th scope="col">List barang</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,19 +76,6 @@
                                     <td>{{ $item->customer->name }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->user->name }}</td>
-                                    <td>
-                                        <ul>
-                                            @if (isset($item->detail))
-                                                @foreach ($item->detail as $item)
-                                                    <li>
-                                                        Kode : {{ $item->barang->code }} <br>
-                                                        Nama : {{ $item->barang->name }} <br>
-                                                        QTY : {{ $item->qty }}
-                                                    </li>
-                                                @endforeach
-                                            @endif
-                                        </ul>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

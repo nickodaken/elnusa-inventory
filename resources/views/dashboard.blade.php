@@ -7,18 +7,23 @@
         use App\Models\Stock\AdjustmentDetailStock;
 
         $products = Barang::all();
+
         $stockIns = StockInDetail::whereBetween('created_at', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();
+
         $stockOuts = StockOutDetail::whereBetween('created_at', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();
+
         $adjustments = StockOutDetail::whereBetween('created_at', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();
+
+        $criticalStocks = Barang::whereColumn('stock', '<=', 'minimal_stock')->get();
     @endphp
     <div class="pagetitle">
         <h1>Dashboard</h1>
@@ -43,16 +48,16 @@
                         <div class="card info-card sales-card">
 
                             <div class="card-body">
-                                <h5 class="card-title">Total Barang <span>|
+                                <h5 class="card-title">Total Stok Kritis <span>|
                                         Periode : {{ Carbon\Carbon::now()->startOfMonth()->format('d-M-Y') }} s/d
                                         {{ Carbon\Carbon::now()->format('d-M-Y') }}</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-menu-button-wide"></i>
+                                        <i class="bi bi-exclamation-triangle"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{ $products->count() }}</h6>
+                                        <h6>{{ $criticalStocks->count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -136,29 +141,29 @@
                         <div class="card recent-sales overflow-auto">
 
                             <div class="card-body">
-                                <h5 class="card-title">Stok Barang <span>| {{ $products->count() }} barang</span></h5>
+                                <h5 class="card-title">Stok Kritis <span>| {{ $products->count() }} barang</span></h5>
 
                                 <div class="table-responsive">
-                                    <table id="table" class="table table-borderless table-hover" style="width:100%">
+                                    <table id="table" class="table table-borderless display nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Kode</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col" class="text-center">Masuk</th>
-                                                <th scope="col" class="text-center">Keluar</th>
-                                                <th scope="col" class="text-center">Stok Aktual</th>
-                                                <th scope="col" class="text-center">Stok Kritis</th>
+                                                <th scope="col">Masuk</th>
+                                                <th scope="col">Keluar</th>
+                                                <th scope="col">Stok Aktual</th>
+                                                <th scope="col">Minimal Stok</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($products as $key => $item)
+                                            @foreach ($criticalStocks as $key => $item)
                                                 <tr>
                                                     <td>{{ $item->code }}</td>
                                                     <td>{{ $item->name }}</td>
-                                                    <td class="text-center">{{ $item->stockin_label }}</td>
-                                                    <td class="text-center">{{ $item->stockout_label }}</td>
-                                                    <td class="text-center">{{ $item->stock }}</td>
-                                                    <td class="text-center">{{ $item->minimal_stock }}</td>
+                                                    <td>{{ $item->stockin_label }}</td>
+                                                    <td>{{ $item->stockout_label }}</td>
+                                                    <td>{{ $item->stock }}</td>
+                                                    <td>{{ $item->minimal_stock }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

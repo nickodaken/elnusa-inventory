@@ -35,6 +35,9 @@
     <link rel="stylesheet" href="{{ asset('datatables/css/fixedColumns.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatables/css/jquery.dataTables.min.css') }}">
 
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -100,6 +103,9 @@
     <script src="{{ asset('datatables/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('datatables/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('datatables/js/jszip.min.js') }}"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
     @yield('script')
 </body>
 

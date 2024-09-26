@@ -27,34 +27,85 @@ class ReportController extends Controller
         $stockOuts = [];
         $adjustments = [];
 
-        if ($startDate && $endDate) {
+        if ($startDate) {
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
             $stockIns = StockInDetail::where('barang_id', $data->id)
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->orderBy('created_at', 'DESC')
+                ->whereBetween('created_at', [$from, $to])
                 ->get();
             $stockOuts = StockOutDetail::where('barang_id', $data->id)
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->orderBy('created_at', 'DESC')
+                ->whereBetween('created_at', [$from, $to])
                 ->get();
             $adjustments = AdjustmentDetailStock::where('barang_id', $data->id)
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->orderBy('created_at', 'DESC')
+                ->whereBetween('created_at', [$from, $to])
                 ->get();
         } else {
             $stockIns = StockInDetail::where('barang_id', $data->id)
                 ->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])
-                ->orderBy('created_at', 'DESC')
                 ->get();
             $stockOuts = StockOutDetail::where('barang_id', $data->id)
                 ->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])
-                ->orderBy('created_at', 'DESC')
                 ->get();
             $adjustments = AdjustmentDetailStock::where('barang_id', $data->id)
                 ->whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])
-                ->orderBy('created_at', 'DESC')
                 ->get();
         }
 
         return view('pages.stock.report.detail', compact(['data', 'stockIns', 'stockOuts', 'adjustments']));
+    }
+
+    public function stockIn()
+    {
+        $startDate = request()->startDate;
+        $endDate = request()->endDate;
+
+        $datas = [];
+        if ($startDate) {
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            $datas = StockInDetail::whereBetween('created_at', [$from, $to])->get();
+        } else {
+            $datas = StockInDetail::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
+        }
+
+        return view('pages.stock.report.stockIn', compact('datas'));
+    }
+
+    public function stockOut()
+    {
+        $startDate = request()->startDate;
+        $endDate = request()->endDate;
+
+        $datas = [];
+        if ($startDate) {
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            $datas = StockOutDetail::whereBetween('created_at', [$from, $to])->get();
+        } else {
+            $datas = StockOutDetail::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
+        }
+
+        return view('pages.stock.report.stockOut', compact('datas'));
+    }
+
+    public function adjustmentStock()
+    {
+        $startDate = request()->startDate;
+        $endDate = request()->endDate;
+
+        $datas = [];
+        if ($startDate) {
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            $datas = AdjustmentDetailStock::whereBetween('created_at', [$from, $to])->get();
+        } else {
+            $datas = AdjustmentDetailStock::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
+        }
+
+        return view('pages.stock.report.adjustment', compact('datas'));
     }
 }

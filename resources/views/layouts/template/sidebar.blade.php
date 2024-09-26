@@ -85,8 +85,24 @@
             <i class="bi bi-bar-chart"></i>
             <span>Laporan Stok</span>
         </a><!-- End Laporan Stok Nav -->
+
+        <a class="nav-link collapsed" href="{{ route('report.stockIn') }}">
+            <i class="bi bi-bar-chart"></i>
+            <span>Laporan Barang Masuk</span>
+        </a><!-- End Laporan Barang Masuk Nav -->
+
+        <a class="nav-link collapsed" href="{{ route('report.stockOut') }}">
+            <i class="bi bi-bar-chart"></i>
+            <span>Laporan Barang Keluar</span>
+        </a><!-- End Laporan Barang Keluar Nav -->
+
+        <a class="nav-link collapsed" href="{{ route('report.adjustmentStock') }}">
+            <i class="bi bi-bar-chart"></i>
+            <span>Laporan Penyesuaian Stok</span>
+        </a><!-- End Laporan Penyesuaian Stok Nav -->
+
         @php
-            $datas = App\Models\Barang::whereColumn('stock', '=', 'minimal_stock')->get();
+            $datas = App\Models\Barang::whereColumn('stock', '<=', 'minimal_stock')->get();
         @endphp
         <a class="nav-link collapsed" href="{{ route('stock.kritis.index') }}">
             <i class="bi bi-exclamation-triangle"></i>

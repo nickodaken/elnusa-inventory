@@ -1,11 +1,11 @@
 @extends('layouts.template.app')
 @section('content')
     <div class="pagetitle">
-        <h1>Data Stok Masuk</h1>
+        <h1>Laporan Stok Keluar</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active">Data Stok Masuk</li>
+                <li class="breadcrumb-item active">Laporan Stok Keluar</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -14,13 +14,10 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">
-                    Daftar Stok Masuk
-                    <a href="{{ route('masuk.create') }}" class="btn btn-sm btn-outline-success">
-                        <i class="bi bi-pencil"></i> Tambah
-                    </a>
+                    Daftar Stok Keluar
                 </h5>
 
-                <form class="row g-3 mb-4" action="{{ route('masuk.index') }}" method="GET">
+                <form class="row g-3 mb-4" action="{{ route('report.stockOut') }}" method="GET">
                     <div class="col-6">
                         <label class="form-label">Tanggal Awal</label>
                         <input type="date" class="form-control" name="startDate"
@@ -33,7 +30,7 @@
                     </div>
                     <div class="text-left">
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <a href="{{ route('masuk.index') }}" class="btn btn-secondary">Reset Filter</a>
+                        <a href="{{ route('report.stockOut') }}" class="btn btn-secondary">Reset Filter</a>
                     </div>
                 </form>
 
@@ -52,8 +49,10 @@
                     <table id="table" class="table table-borderless display nowrap" style="width:100%">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center">#</th>
                                 <th scope="col">Nomor Nota</th>
+                                <th scope="col">No PO</th>
+                                <th scope="col">Kode Barang</th>
+                                <th scope="col">Nama Barang</th>
                                 <th scope="col">Supplier</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
@@ -62,18 +61,11 @@
                         <tbody>
                             @foreach ($datas as $key => $item)
                                 <tr>
-                                    <td class="text-center">
-                                        <form action="{{ route('masuk.delete', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" onclick="return confirm('Are you sure?')"
-                                                class="btn btn-sm btn-outline-secondary">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td>{{ $item->bill_no }}</td>
-                                    <td>{{ $item->supplier->name }}</td>
+                                    <td>{{ $item->stock->bill_no }}</td>
+                                    <td>{{ $item->po_number }}</td>
+                                    <td>{{ $item->barang->code }}</td>
+                                    <td>{{ $item->barang->name }}</td>
+                                    <td>{{ $item->stock->customer->name }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->user->name }}</td>
                                 </tr>

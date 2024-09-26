@@ -22,7 +22,10 @@ class StockInController extends Controller
 
         $datas = [];
         if ($startDate) {
-            $datas = StockIn::whereBetween('created_at', [$startDate, $endDate])->get();
+            $from = Carbon::createFromFormat('Y-m-d', $startDate);
+            $to = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            $datas = StockIn::whereBetween('created_at', [$from, $to])->get();
         } else {
             $datas = StockIn::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
         }
@@ -32,7 +35,7 @@ class StockInController extends Controller
 
     public function add()
     {
-        $datas = Barang::where('stock', '>', 0)->get();
+        $datas = Barang::all();
         $suppliers = Supplier::all();
         $carts = StockInDetail::where('user_id', Auth::id())->whereNull('stock_id')->get();
         return view('pages.stock.stockIn.add', compact(['datas', 'suppliers', 'carts']));
@@ -43,6 +46,7 @@ class StockInController extends Controller
         $data = new StockInDetail();
         $data->barang_id = request()->barang_id;
         $data->qty = request()->qty;
+        $data->po_number = request()->po_number;
         $data->user_id = Auth::id();
         $data->save();
 
@@ -76,16 +80,13 @@ class StockInController extends Controller
         DB::beginTransaction();
         try {
             if ($carts->count() > 0) {
-                // Available alpha caracters
-                $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-                // generate a pin based on 2 * 7 digits + a random character
-                $pin = mt_rand(1000000, 9999999)
-                    . mt_rand(1000000, 9999999)
-                    . $characters[rand(0, strlen($characters) - 1)];
+                $totalRFC = sprintf("%03d", StockIn::whereYear('created_at', Carbon::now())->count() + 1);
+                $month = Carbon::now()->format('m');
+                $year = Carbon::now()->format('Y');
+                $billNo = $totalRFC . '/' . 'StockIn' . '/' . $month . '/' . $year;
 
                 $data = new StockIn();
-                $data->bill_no = str_shuffle($pin);
+                $data->bill_no = $billNo;
                 $data->supplier_id = request()->supplier_id;
                 $data->user_id = Auth::id();
                 $data->save();
