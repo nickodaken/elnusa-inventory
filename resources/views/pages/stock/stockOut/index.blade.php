@@ -67,9 +67,14 @@
                                         <form action="{{ route('keluar.delete', $item->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <a href="{{ route('keluar.detail', $item->id) }}"
-                                                class="btn btn-sm btn-outline-primary">
+                                            <a href="{{ route('keluar.detail', $item->id) }}" onclick="window.print();"
+                                                class="btn
+                                                btn-sm btn-outline-primary">
                                                 <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a href="{{ route('keluar.getPdf', $item->id) }}"
+                                                class="btn btn-sm btn-outline-info" target="_balnk">
+                                                <i class="bi bi-download"></i>
                                             </a>
                                             <button type="submit" onclick="return confirm('Are you sure?')"
                                                 class="btn btn-sm btn-outline-secondary">

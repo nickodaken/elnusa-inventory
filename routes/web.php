@@ -132,9 +132,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/keluar/add', [StockOutController::class, 'store'])->name('keluar.add');
         Route::delete('/keluar/{id}', [StockOutController::class, 'delete'])->name('keluar.delete');
         Route::get('/keluar/{id}', [StockOutController::class, 'detail'])->name('keluar.detail');
+        Route::get('/keluar/download/do/{id}', [StockOutController::class, 'getPdf'])->name('keluar.getPdf');
 
         /*
-        * Stock Out
+        * Adjustment Stock
         */
         Route::get('/penyesuaian/stok', [AdjustmentStockController::class, 'index'])->name('penyesuaian.stok.index');
         Route::get('/penyesuaian/stok/add', [AdjustmentStockController::class, 'add'])->name('penyesuaian.stok.create');

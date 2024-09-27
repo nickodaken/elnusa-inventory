@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class StockOutController extends Controller
 {
@@ -156,5 +157,16 @@ class StockOutController extends Controller
             Alert::error('Gagal', $th);
             return redirect()->back();
         }
+    }
+
+    public function getPDF($id)
+    {
+        $data = StockOut::findOrFail($id);
+
+        return view('pdf.do', compact('data'));
+
+        $pdf = PDF::loadView('pdf.do', compact('data'));
+
+        return $pdf->download(str_replace("/", "-", $data->do_number) . '.pdf');
     }
 }
