@@ -18,7 +18,8 @@ class AdjustmentDetailStock extends Model
         'stock_existing',
         'stock_actual',
         'remark',
-        'user_id'
+        'user_id',
+        'date'
     ];
 
     public function adjustment(): BelongsTo

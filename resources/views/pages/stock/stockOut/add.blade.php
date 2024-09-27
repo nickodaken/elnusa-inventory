@@ -46,10 +46,6 @@
                                 <label class="form-label">Jumlah</label>
                                 <input type="number" class="form-control" name="qty" value="1" required>
                             </div>
-                            <div class="col-md-12">
-                                <label class="form-label">Nomor DO</label>
-                                <input type="text" class="form-control" name="do_number" required>
-                            </div>
 
                             <div class="text-end">
                                 <button type="submit" class="btn btn-outline-primary">Tambah</button>

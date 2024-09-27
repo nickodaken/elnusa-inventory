@@ -8,17 +8,17 @@
 
         $products = Barang::all();
 
-        $stockIns = StockInDetail::whereBetween('created_at', [
+        $stockIns = StockInDetail::whereBetween('date', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();
 
-        $stockOuts = StockOutDetail::whereBetween('created_at', [
+        $stockOuts = StockOutDetail::whereBetween('date', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();
 
-        $adjustments = StockOutDetail::whereBetween('created_at', [
+        $adjustments = StockOutDetail::whereBetween('date', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();
@@ -149,10 +149,9 @@
                                             <tr>
                                                 <th scope="col">Kode</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">Masuk</th>
-                                                <th scope="col">Keluar</th>
-                                                <th scope="col">Stok Aktual</th>
-                                                <th scope="col">Minimal Stok</th>
+                                                <th scope="col" class="text-center">Stok Aktual</th>
+                                                <th scope="col" class="text-center">Minimal Stok</th>
+                                                <th scope="col" class="text-center">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -160,10 +159,19 @@
                                                 <tr>
                                                     <td>{{ $item->code }}</td>
                                                     <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->stockin_label }}</td>
-                                                    <td>{{ $item->stockout_label }}</td>
-                                                    <td>{{ $item->stock }}</td>
-                                                    <td>{{ $item->minimal_stock }}</td>
+                                                    <td class="text-center">{{ $item->stock }}</td>
+                                                    <td class="text-center">{{ $item->minimal_stock }}</td>
+                                                    <td class="text-center">
+                                                        @if ($item->stock == $item->minimal_stock)
+                                                            <span class="badge bg-warning text-dark">
+                                                                <i class="bi bi-exclamation-triangle me-1"></i> Stok Menipis
+                                                            </span>
+                                                        @else
+                                                            <span class="badge bg-danger">
+                                                                <i class="bi bi-exclamation-octagon me-1"></i> Stok Habis
+                                                            </span>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

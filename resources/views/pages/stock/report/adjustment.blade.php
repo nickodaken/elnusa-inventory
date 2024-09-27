@@ -66,7 +66,7 @@
                                     <td>{{ $item->barang->name }}</td>
                                     <td>{{ $item->stock_existing }}</td>
                                     <td>{{ $item->stock_actual }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ $item->date }}</td>
                                     <td>{{ $item->user->name }}</td>
                                 </tr>
                             @endforeach

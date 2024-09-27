@@ -40,7 +40,7 @@
                                     <td>{{ $item->username }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->roles_label[0] ?? '' }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ $item->date }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('user.delete', $item->id) }}" method="post">
                                             @csrf

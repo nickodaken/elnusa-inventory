@@ -16,6 +16,7 @@ class AdjustmentStock extends Model
         'bill_no',
         'user_id',
         'remark',
+        'date'
     ];
 
     public function detail(): HasMany

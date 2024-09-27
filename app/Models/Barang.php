@@ -28,7 +28,8 @@ class Barang extends Model
         'po_number',
         'location',
         'exp_date',
-        'remark'
+        'remark',
+        'material_no'
     ];
 
     protected $appends = ['stockin_label', 'stockout_label'];

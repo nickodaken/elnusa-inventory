@@ -36,7 +36,7 @@
                                     <td class="text-center">
                                         <a href="{{ route('report.detail', $item->id) }}"
                                             class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-eye"></i> Lihat Detail
+                                            <i class="bi bi-eye"></i>
                                         </a>
                                     </td>
                                     <td>{{ $item->code }}</td>

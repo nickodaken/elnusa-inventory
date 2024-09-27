@@ -46,7 +46,7 @@
                                 <th scope="col">Kode</th>
                                 <th scope="col">Dibuat Oleh</th>
                                 <th scope="col">Remark</th>
-                                <th scope="col">Dibuat Tanggal</th>
+                                <th scope="col">Tanggal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,13 +55,13 @@
                                     <td class="text-center">
                                         <a href="{{ route('penyesuaian.stok.detail', $item->id) }}"
                                             class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-eye"></i> Daftar Barang
+                                            <i class="bi bi-eye"></i>
                                         </a>
                                     </td>
                                     <td>{{ $item->bill_no }}</td>
                                     <td>{{ $item->user->name }}</td>
                                     <td>{{ $item->remark }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ carbon\Carbon::parse($item->date)->format('d-M-Y') ?? '' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

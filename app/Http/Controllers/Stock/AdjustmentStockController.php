@@ -24,9 +24,9 @@ class AdjustmentStockController extends Controller
             $from = Carbon::createFromFormat('Y-m-d', $startDate);
             $to = Carbon::createFromFormat('Y-m-d', $endDate);
 
-            $datas = AdjustmentStock::whereBetween('created_at', [$from, $to])->get();
+            $datas = AdjustmentStock::whereBetween('date', [$from, $to])->get();
         } else {
-            $datas = AdjustmentStock::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
+            $datas = AdjustmentStock::whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
         }
 
         return view('pages.stock.adjustmentStock.index', compact('datas'));
@@ -89,6 +89,7 @@ class AdjustmentStockController extends Controller
                 $data->bill_no = $billNo;
                 $data->user_id = Auth::id();
                 $data->remark = request()->remark;
+                $data->date = Carbon::now();
                 $data->save();
 
 
@@ -96,6 +97,7 @@ class AdjustmentStockController extends Controller
                 foreach ($carts as $value) {
                     $detail = AdjustmentDetailStock::findOrFail($value->id);
                     $detail->adjustment_stock_id = $data->id;
+                    $detail->date = Carbon::now();
                     $detail->save();
 
                     $updateStock = Barang::findOrFail($value->barang_id);

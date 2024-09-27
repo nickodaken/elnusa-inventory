@@ -25,9 +25,9 @@ class StockInController extends Controller
             $from = Carbon::createFromFormat('Y-m-d', $startDate);
             $to = Carbon::createFromFormat('Y-m-d', $endDate);
 
-            $datas = StockIn::whereBetween('created_at', [$from, $to])->get();
+            $datas = StockIn::whereBetween('date', [$from, $to])->get();
         } else {
-            $datas = StockIn::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
+            $datas = StockIn::whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
         }
 
         return view('pages.stock.stockIn.index', compact('datas'));
@@ -80,15 +80,16 @@ class StockInController extends Controller
         DB::beginTransaction();
         try {
             if ($carts->count() > 0) {
-                $totalRFC = sprintf("%03d", StockIn::whereYear('created_at', Carbon::now())->count() + 1);
+                $total = sprintf("%03d", StockIn::whereYear('created_at', Carbon::now())->count() + 1);
                 $month = Carbon::now()->format('m');
                 $year = Carbon::now()->format('Y');
-                $billNo = $totalRFC . '/' . 'StockIn' . '/' . $month . '/' . $year;
+                $billNo = $total . '/' . 'StockIn' . '/' . $month . '/' . $year;
 
                 $data = new StockIn();
                 $data->bill_no = $billNo;
                 $data->supplier_id = request()->supplier_id;
                 $data->user_id = Auth::id();
+                $data->date = Carbon::now();
                 $data->save();
 
 
@@ -96,6 +97,7 @@ class StockInController extends Controller
                 foreach ($carts as $value) {
                     $detail = StockInDetail::findOrFail($value->id);
                     $detail->stock_id = $data->id;
+                    $detail->date = Carbon::now();
                     $detail->save();
 
                     $updateStock = Barang::findOrFail($value->barang_id);
@@ -118,6 +120,12 @@ class StockInController extends Controller
             Alert::error('Gagal', $th);
             return redirect()->back();
         }
+    }
+
+    public function detail($id)
+    {
+        $data = StockIn::findOrFail($id);
+        return view('pages.stock.stockIn.detail', compact('data'));
     }
 
     public function delete($id)

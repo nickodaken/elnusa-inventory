@@ -27,6 +27,7 @@
                             <tr>
                                 <th scope="col" class="text-center">#</th>
                                 <th scope="col">Kode</th>
+                                <th scope="col">Nomor Material</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Proyek</th>
                                 <th scope="col">Stok</th>
@@ -57,6 +58,7 @@
                                         </form>
                                     </td>
                                     <td>{{ $item->code }}</td>
+                                    <td>{{ $item->material_no }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->project->name }}</td>
                                     <td>{{ $item->stock }}</td>

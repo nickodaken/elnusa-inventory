@@ -74,7 +74,7 @@
                                             <td class="text-center">{{ $item->stock_actual }}</td>
                                             <td>{{ $item->remark }}</td>
                                             <td>{{ $item->user->name }}</td>
-                                            <td>{{ $item->created_at }}</td>
+                                            <td>{{ $item->date }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -110,7 +110,7 @@
                                             <td>{{ $item->stock->supplier->name }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td>{{ $item->user->name }}</td>
-                                            <td>{{ $item->created_at }}</td>
+                                            <td>{{ $item->date }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -146,7 +146,7 @@
                                             <td>{{ $item->stock->customer->name }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td>{{ $item->user->name }}</td>
-                                            <td>{{ $item->created_at }}</td>
+                                            <td>{{ $item->date }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

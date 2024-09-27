@@ -17,6 +17,8 @@ class StockOut extends Model
         'bill_no',
         'customer_id',
         'user_id',
+        'date',
+        'do_number'
     ];
 
     public function customer(): BelongsTo

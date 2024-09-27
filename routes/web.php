@@ -119,6 +119,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/masuk/cart/delete/{id}', [StockInController::class, 'deleteCart'])->name('masuk.cart.delete');
         Route::post('/masuk/add', [StockInController::class, 'store'])->name('masuk.add');
         Route::delete('/masuk/{id}', [StockInController::class, 'delete'])->name('masuk.delete');
+        Route::get('/masuk/{id}', [StockInController::class, 'detail'])->name('masuk.detail');
 
         /*
         * Stock Out
@@ -130,6 +131,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/keluar/cart/delete/{id}', [StockOutController::class, 'deleteCart'])->name('keluar.cart.delete');
         Route::post('/keluar/add', [StockOutController::class, 'store'])->name('keluar.add');
         Route::delete('/keluar/{id}', [StockOutController::class, 'delete'])->name('keluar.delete');
+        Route::get('/keluar/{id}', [StockOutController::class, 'detail'])->name('keluar.detail');
 
         /*
         * Stock Out

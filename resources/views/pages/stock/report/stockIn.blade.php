@@ -53,6 +53,7 @@
                                 <th scope="col">No PO</th>
                                 <th scope="col">Kode Barang</th>
                                 <th scope="col">Nama Barang</th>
+                                <th scope="col" class="text-center">Jumlah</th>
                                 <th scope="col">Supplier</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
@@ -65,8 +66,9 @@
                                     <td>{{ $item->po_number }}</td>
                                     <td>{{ $item->barang->code }}</td>
                                     <td>{{ $item->barang->name }}</td>
+                                    <td class="text-center">{{ $item->qty }}</td>
                                     <td>{{ $item->stock->supplier->name }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ $item->date }}</td>
                                     <td>{{ $item->user->name }}</td>
                                 </tr>
                             @endforeach

@@ -20,11 +20,16 @@
                 <form class="row g-3" action="{{ $data ? route('barang.update', $data->id) : route('barang.add') }}"
                     method="POST">
                     @csrf
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="form-label">Kode</label>
                         <input type="text" class="form-control" name="code" value="{{ $data->code ?? '' }}" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Nomor Material</label>
+                        <input type="text" class="form-control" name="material_no" value="{{ $data->material_no ?? '' }}"
+                            required>
+                    </div>
+                    <div class="col-md-4">
                         <label class="form-label">Nama</label>
                         <input type="text" class="form-control" name="name" value="{{ $data->name ?? '' }}" required>
                     </div>

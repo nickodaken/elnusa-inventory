@@ -19,7 +19,7 @@
                         <h5 class="card-title">
                             List Data Penyesuaian Stok
                             <a href="{{ route('penyesuaian.stok.index') }}"
-                                class="btn btn-sm btn-outline-secondary">Kembali</a>
+                                class="btn btn-sm btn-outline-secondary m-2">Kembali</a>
                         </h5>
                         <div class="table-responsive">
                             <table id="table" class="table table table-hover" style="width:100%">

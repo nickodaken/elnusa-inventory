@@ -55,6 +55,7 @@ class BarangController extends Controller
             $data->location = request()->location;
             $data->exp_date = request()->exp_date;
             $data->remark = request()->remark;
+            $data->material_no = request()->material_no;
             $data->save();
 
             if ($id) {

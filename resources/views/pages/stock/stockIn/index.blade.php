@@ -66,6 +66,10 @@
                                         <form action="{{ route('masuk.delete', $item->id) }}" method="post">
                                             @csrf
                                             @method('delete')
+                                            <a href="{{ route('masuk.detail', $item->id) }}"
+                                                class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
                                             <button type="submit" onclick="return confirm('Are you sure?')"
                                                 class="btn btn-sm btn-outline-secondary">
                                                 <i class="bi bi-trash"></i>
@@ -74,7 +78,7 @@
                                     </td>
                                     <td>{{ $item->bill_no }}</td>
                                     <td>{{ $item->supplier->name }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ carbon\Carbon::parse($item->date)->format('d-M-Y') ?? '' }}</td>
                                     <td>{{ $item->user->name }}</td>
                                 </tr>
                             @endforeach

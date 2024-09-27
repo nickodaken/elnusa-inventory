@@ -25,9 +25,9 @@ class StockOutController extends Controller
             $from = Carbon::createFromFormat('Y-m-d', $startDate);
             $to = Carbon::createFromFormat('Y-m-d', $endDate);
 
-            $datas = StockOut::whereBetween('created_at', [$from, $to])->get();
+            $datas = StockOut::whereBetween('date', [$from, $to])->get();
         } else {
-            $datas = StockOut::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
+            $datas = StockOut::whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()])->get();
         }
 
         return view('pages.stock.stockOut.index', compact('datas'));
@@ -46,7 +46,6 @@ class StockOutController extends Controller
         $data = new StockOutDetail();
         $data->barang_id = request()->barang_id;
         $data->qty = request()->qty;
-        $data->do_number = request()->do_number;
         $data->user_id = Auth::id();
         $data->save();
 
@@ -80,15 +79,20 @@ class StockOutController extends Controller
         DB::beginTransaction();
         try {
             if ($carts->count() > 0) {
-                $totalRFC = sprintf("%03d", StockOut::whereYear('created_at', Carbon::now())->count() + 1);
+                $total = sprintf("%03d", StockOut::whereYear('created_at', Carbon::now())->count() + 1);
                 $month = Carbon::now()->format('m');
                 $year = Carbon::now()->format('Y');
-                $billNo = $totalRFC . '/' . 'StockIn' . '/' . $month . '/' . $year;
+                $billNo = $total . '/' . 'StockIn' . '/' . $month . '/' . $year;
+                $doNo = $total . '-' . 'DO' . '/' . $month . '/' . $year;
+
+
 
                 $data = new StockOut();
                 $data->bill_no = $billNo;
                 $data->customer_id = request()->customer_id;
+                $data->do_number = $doNo;
                 $data->user_id = Auth::id();
+                $data->date = Carbon::now();
                 $data->save();
 
 
@@ -96,6 +100,7 @@ class StockOutController extends Controller
                 foreach ($carts as $value) {
                     $detail = StockOutDetail::findOrFail($value->id);
                     $detail->stock_id = $data->id;
+                    $detail->date = Carbon::now();
                     $detail->save();
 
                     $updateStock = Barang::findOrFail($value->barang_id);
@@ -118,6 +123,12 @@ class StockOutController extends Controller
             Alert::error('Gagal', $th);
             return redirect()->back();
         }
+    }
+
+    public function detail($id)
+    {
+        $data = StockOut::findOrFail($id);
+        return view('pages.stock.stockOut.detail', compact('data'));
     }
 
     public function delete($id)

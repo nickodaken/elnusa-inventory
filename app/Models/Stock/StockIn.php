@@ -17,6 +17,7 @@ class StockIn extends Model
         'bill_no',
         'supplier_id',
         'user_id',
+        'date'
     ];
 
     public function supplier(): BelongsTo

@@ -54,6 +54,7 @@
                             <tr>
                                 <th scope="col" class="text-center">#</th>
                                 <th scope="col">Nomor Nota</th>
+                                <th scope="col">Nomor DO</th>
                                 <th scope="col">Pelanggan</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
@@ -66,6 +67,10 @@
                                         <form action="{{ route('keluar.delete', $item->id) }}" method="post">
                                             @csrf
                                             @method('delete')
+                                            <a href="{{ route('keluar.detail', $item->id) }}"
+                                                class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
                                             <button type="submit" onclick="return confirm('Are you sure?')"
                                                 class="btn btn-sm btn-outline-secondary">
                                                 <i class="bi bi-trash"></i>
@@ -73,8 +78,9 @@
                                         </form>
                                     </td>
                                     <td>{{ $item->bill_no }}</td>
+                                    <td>{{ $item->do_number }}</td>
                                     <td>{{ $item->customer->name }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ carbon\Carbon::parse($item->date)->format('d-M-Y') ?? '' }}</td>
                                     <td>{{ $item->user->name }}</td>
                                 </tr>
                             @endforeach
