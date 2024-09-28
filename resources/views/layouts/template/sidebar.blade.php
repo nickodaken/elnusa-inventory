@@ -8,7 +8,7 @@
                 <span>Dashboard</span>
             </a>
         </li><!-- End Dashboard Nav -->
-        @if (Auth::user()->roles_label[0])
+        @if (Auth::user()->roles_label[0] == 'SuperAdmin')
             <li class="nav-heading">Super Admin Menu</li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('user.index') }}">

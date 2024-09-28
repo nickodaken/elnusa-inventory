@@ -15,9 +15,11 @@
             <div class="card-body">
                 <h5 class="card-title">
                     Daftar Stok Masuk
-                    <a href="{{ route('masuk.create') }}" class="btn btn-sm btn-outline-success">
-                        <i class="bi bi-pencil"></i> Tambah
-                    </a>
+                    @if (Auth::user()->roles_label[0] != 'Manager')
+                        <a href="{{ route('masuk.create') }}" class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-pencil"></i> Tambah
+                        </a>
+                    @endif
                 </h5>
 
                 <form class="row g-3 mb-4" action="{{ route('masuk.index') }}" method="GET">
@@ -70,10 +72,12 @@
                                                 class="btn btn-sm btn-outline-primary">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <button type="submit" onclick="return confirm('Are you sure?')"
-                                                class="btn btn-sm btn-outline-secondary">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
+                                            @if (Auth::user()->roles_label[0] == 'SuperAdmin')
+                                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                                    class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            @endif
                                         </form>
                                     </td>
                                     <td>{{ $item->bill_no }}</td>

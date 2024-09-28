@@ -15,9 +15,11 @@
             <div class="card-body">
                 <h5 class="card-title">
                     Daftar Barang
-                    <a href="{{ route('barang.create') }}" class="btn btn-sm btn-outline-success">
-                        <i class="bi bi-pencil"></i> Tambah
-                    </a>
+                    @if (Auth::user()->roles_label[0] == 'SuperAdmin')
+                        <a href="{{ route('barang.create') }}" class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-pencil"></i> Tambah
+                        </a>
+                    @endif
                 </h5>
 
                 <!-- Table -->
@@ -44,18 +46,20 @@
                             @foreach ($datas as $key => $item)
                                 <tr>
                                     <td class="text-center">
-                                        <form action="{{ route('barang.delete', $item->id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <a href="{{ route('barang.edit', $item->id) }}"
-                                                class="btn btn-sm btn-outline-info">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <button type="submit" onclick="return confirm('Are you sure?')"
-                                                class="btn btn-sm btn-outline-secondary">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
+                                        @if (Auth::user()->roles_label[0] == 'SuperAdmin')
+                                            <form action="{{ route('barang.delete', $item->id) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <a href="{{ route('barang.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-outline-info">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                                    class="btn btn-sm btn-outline-secondary">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                     <td>{{ $item->code }}</td>
                                     <td>{{ $item->material_no }}</td>

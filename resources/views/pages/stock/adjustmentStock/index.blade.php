@@ -15,9 +15,11 @@
             <div class="card-body">
                 <h5 class="card-title">
                     Daftar Penyesuaian Stok
-                    <a href="{{ route('penyesuaian.stok.create') }}" class="btn btn-sm btn-outline-success">
-                        <i class="bi bi-pencil"></i> Tambah
-                    </a>
+                    @if (Auth::user()->roles_label[0] != 'Manager')
+                        <a href="{{ route('penyesuaian.stok.create') }}" class="btn btn-sm btn-outline-success">
+                            <i class="bi bi-pencil"></i> Tambah
+                        </a>
+                    @endif
                 </h5>
 
                 <form class="row g-3 mb-4" action="{{ route('penyesuaian.stok.index') }}" method="GET">
