@@ -49,7 +49,7 @@ class CustomerController extends Controller
             return redirect()->route('pelanggan.index');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            Alert::error('Gagal', $th);
+            Alert::error('Gagal', $th->getMessage());
             return redirect()->back();
         }
     }

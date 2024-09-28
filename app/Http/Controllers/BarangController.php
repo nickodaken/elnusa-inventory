@@ -67,7 +67,7 @@ class BarangController extends Controller
             return redirect()->route('barang.index');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            Alert::error('Gagal', $th);
+            Alert::error('Gagal', $th->getMessage());
             return redirect()->back();
         }
     }

@@ -6,12 +6,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index()
     {
         $datas = User::all();
+        return $datas;
         return view('pages.user.index', compact('datas'));
     }
 
@@ -23,7 +25,9 @@ class UserController extends Controller
             $data = User::findOrFail($id);
         }
 
-        return view('pages.user.form', compact('data'));
+        $roles = Role::all();
+
+        return view('pages.user.form', compact('data', 'roles'));
     }
 
     public function store($id = null)
@@ -43,6 +47,19 @@ class UserController extends Controller
             }
             $data->save();
 
+            if (request()->role) {
+                $role = Role::findOrFail(request()->role);
+
+                // return $role;
+                if ($data->roles_label) {
+                    $data->roles_label->map(function ($res) use ($data) {
+                        $data->removeRole($res);
+                    });
+                }
+                $data->assignRole($role);
+            }
+
+
             if ($id) {
                 Alert::success('Berhasil', 'Data Pengguna Berhasil Diubah');
             } else {
@@ -52,7 +69,7 @@ class UserController extends Controller
             return redirect()->route('user.index');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            Alert::error('Gagal', $th);
+            Alert::error('Gagal', $th->getMessage());
             return redirect()->back();
         }
     }

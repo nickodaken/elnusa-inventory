@@ -46,7 +46,7 @@ class ProjectController extends Controller
             return redirect()->route('proyek.index');
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
-            Alert::error('Gagal', $th);
+            Alert::error('Gagal', $th->getMessage());
             return redirect()->back();
         }
     }

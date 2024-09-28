@@ -117,7 +117,7 @@ class AdjustmentStockController extends Controller
         } catch (\Throwable $th) {
             Log::error($th->getMessage());
             DB::rollback();
-            Alert::error('Gagal', $th);
+            Alert::error('Gagal', $th->getMessage());
             return redirect()->back();
         }
     }

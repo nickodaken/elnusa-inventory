@@ -37,6 +37,15 @@
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" name="password" {{ $data == [] ? 'required' : '' }}>
                     </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Role</label>
+                        <select name="role" class="form-control">
+                            <option value="" disabled selected>Pilih</option>
+                            @foreach ($roles as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     {{-- <div class="col-md-4">
                         <label for="inputState" class="form-label">State</label>
                         <select id="inputState" class="form-select" name="role">
