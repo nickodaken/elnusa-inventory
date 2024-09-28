@@ -50,6 +50,10 @@
                                 <label class="form-label">Nomor PO</label>
                                 <input type="text" class="form-control" name="po_number" required>
                             </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Keterangan</label>
+                                <input type="text" class="form-control" name="remarks">
+                            </div>
 
                             <div class="text-end">
                                 <button type="submit" class="btn btn-outline-primary">Tambah</button>
@@ -72,6 +76,7 @@
                                         <th scope="col" class="text-center">Stok</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Stok Aktual</th>
+                                        <th scope="col" class="text-center">Keterangan</th>
                                         <th scope="col" class="text-center">#</th>
                                     </tr>
                                 </thead>
@@ -84,6 +89,7 @@
                                             <td class="text-center">{{ $item->barang->stock }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td class="text-center">{{ $item->barang->stock + $item->qty }}</td>
+                                            <td class="text-center">{{ $item->remarks }}</td>
                                             <td class="text-center">
                                                 <form action="{{ route('masuk.cart.delete', $item->id) }}" method="post">
                                                     @csrf

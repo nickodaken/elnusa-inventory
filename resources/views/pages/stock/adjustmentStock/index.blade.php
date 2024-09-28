@@ -45,7 +45,7 @@
                                 <th scope="col" class="text-center">#</th>
                                 <th scope="col">Kode</th>
                                 <th scope="col">Dibuat Oleh</th>
-                                <th scope="col">Remark</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Tanggal</th>
                             </tr>
                         </thead>

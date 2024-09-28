@@ -101,6 +101,7 @@
                         <td class="text-center">{{ $item->qty }}</td>
                         <td>{{ $item->barang->unit->name }}</td>
                         <td>{{ $item->barang->name }}</td>
+                        <td>{{ $item->remarks }}</td>
                         <td></td>
                     @endforeach
                 </tbody>

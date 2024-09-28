@@ -18,7 +18,8 @@ class StockInDetail extends Model
         'qty',
         'user_id',
         'po_number',
-        'date'
+        'date',
+        'remarks'
     ];
 
     public function stock(): BelongsTo

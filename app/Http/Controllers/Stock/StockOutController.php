@@ -44,13 +44,21 @@ class StockOutController extends Controller
 
     public function cart()
     {
-        $data = new StockOutDetail();
-        $data->barang_id = request()->barang_id;
-        $data->qty = request()->qty;
-        $data->user_id = Auth::id();
-        $data->save();
+        $barang = Barang::where('id', request()->barang_id)->first();
 
-        Alert::success('Berhasil', 'Barang Berhasil Ditambahkan');
+        if (request()->qty <= $barang->stock) {
+            $data = new StockOutDetail();
+            $data->barang_id = request()->barang_id;
+            $data->qty = request()->qty;
+            $data->remarks = request()->remarks;
+            $data->user_id = Auth::id();
+            $data->save();
+
+            Alert::success('Berhasil', 'Barang Berhasil Ditambahkan');
+        } else {
+            Alert::error('Gagal', 'Stok Tidak Mencukupi');
+        }
+
         return redirect()->back();
     }
 
@@ -84,14 +92,11 @@ class StockOutController extends Controller
                 $month = Carbon::now()->format('m');
                 $year = Carbon::now()->format('Y');
                 $billNo = $total . '/' . 'StockIn' . '/' . $month . '/' . $year;
-                $doNo = $total . '-' . 'DO' . '/' . $month . '/' . $year;
-
-
 
                 $data = new StockOut();
                 $data->bill_no = $billNo;
                 $data->customer_id = request()->customer_id;
-                $data->do_number = $doNo;
+                $data->do_number = request()->do_number;
                 $data->user_id = Auth::id();
                 $data->date = Carbon::now();
                 $data->save();

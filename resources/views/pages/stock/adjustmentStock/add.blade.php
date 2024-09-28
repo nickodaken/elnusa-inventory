@@ -109,7 +109,7 @@
                         <form class="row g-3" action="{{ route('penyesuaian.stok.add') }}" method="POST">
                             @csrf
                             <div class="col-md-12">
-                                <label class="form-label">Catatan</label>
+                                <label class="form-label">Keterangan</label>
                                 <input type="text" class="form-control" name="remark">
                             </div>
                             <div class="text-center">

@@ -54,6 +54,7 @@
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Stok</th>
                                 <th scope="col">Stok Aktual</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
                             </tr>
@@ -66,6 +67,7 @@
                                     <td>{{ $item->barang->name }}</td>
                                     <td>{{ $item->stock_existing }}</td>
                                     <td>{{ $item->stock_actual }}</td>
+                                    <td>{{ $item->remark }}</td>
                                     <td>{{ $item->date }}</td>
                                     <td>{{ $item->user->name }}</td>
                                 </tr>

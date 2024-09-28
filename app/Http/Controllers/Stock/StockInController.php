@@ -47,6 +47,7 @@ class StockInController extends Controller
         $data->barang_id = request()->barang_id;
         $data->qty = request()->qty;
         $data->po_number = request()->po_number;
+        $data->remarks = request()->remarks;
         $data->user_id = Auth::id();
         $data->save();
 

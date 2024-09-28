@@ -46,6 +46,10 @@
                                 <label class="form-label">Jumlah</label>
                                 <input type="number" class="form-control" name="qty" value="1" required>
                             </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Keterangan</label>
+                                <input type="text" class="form-control" name="remarks">
+                            </div>
 
                             <div class="text-end">
                                 <button type="submit" class="btn btn-outline-primary">Tambah</button>
@@ -68,6 +72,7 @@
                                         <th scope="col" class="text-center">Stok</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Stok Aktual</th>
+                                        <th scope="col">Keterangan</th>
                                         <th scope="col" class="text-center">#</th>
                                     </tr>
                                 </thead>
@@ -80,6 +85,8 @@
                                             <td class="text-center">{{ $item->barang->stock }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td class="text-center">{{ $item->barang->stock - $item->qty }}</td>
+                                            <td>{{ $item->remarks }}</td>
+
                                             <td class="text-center">
                                                 <form action="{{ route('keluar.cart.delete', $item->id) }}" method="post">
                                                     @csrf
@@ -105,6 +112,10 @@
                     <div class="card-body">
                         <form class="row g-3" action="{{ route('keluar.add') }}" method="POST">
                             @csrf
+                            <div class="col-md-12">
+                                <label class="form-label">Nomor DO</label>
+                                <input type="text" class="form-control" name="do_number" required>
+                            </div>
                             <div class="col-md-12">
                                 <label class="form-label">Customer</label>
                                 <select name="customer_id" class="form-control">

@@ -1,9 +1,9 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="{{ asset('NiceAdmin/assets/img/logo.png') }}" alt="">
-            <span class="d-none d-lg-block">ELNUSA</span>
+        <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
+            <img src="{{ asset('img/logo-elnusa-1.png') }}">
+            <span class="d-none d-lg-block">elnusa</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -30,12 +30,12 @@
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <hr class="dropdown-divider">
                     </li>

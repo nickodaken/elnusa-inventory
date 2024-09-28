@@ -61,7 +61,7 @@
                                         <th scope="col">Nota</th>
                                         <th scope="col">Stok Awal</th>
                                         <th scope="col" class="text-center">Stok Aktual</th>
-                                        <th scope="col" class="text-center">Keterangan</th>
+                                        <th scope="col">Keterangan</th>
                                         <th scope="col">Dibuat Oleh</th>
                                         <th scope="col">Tanggal</th>
                                     </tr>
@@ -97,8 +97,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nota</th>
+                                        <th scope="col">Nomor PO</th>
                                         <th scope="col">Supplier</th>
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col">Keterangan</th>
                                         <th scope="col">Dibuat Oleh</th>
                                         <th scope="col">Tanggal</th>
                                     </tr>
@@ -107,8 +109,10 @@
                                     @foreach ($stockIns as $key => $item)
                                         <tr>
                                             <td>{{ $item->stock->bill_no }}</td>
+                                            <td>{{ $item->po_number }}</td>
                                             <td>{{ $item->stock->supplier->name }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
+                                            <td>{{ $item->remarks }}</td>
                                             <td>{{ $item->user->name }}</td>
                                             <td>{{ $item->date }}</td>
                                         </tr>
@@ -133,8 +137,10 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nota</th>
+                                        <th scope="col">Nomor DO</th>
                                         <th scope="col">Pelanggan</th>
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col">Keterangan</th>
                                         <th scope="col">Dibuat Oleh</th>
                                         <th scope="col">Tanggal</th>
                                     </tr>
@@ -143,8 +149,10 @@
                                     @foreach ($stockOuts as $key => $item)
                                         <tr>
                                             <td>{{ $item->stock->bill_no }}</td>
+                                            <td>{{ $item->stock->do_number }}</td>
                                             <td>{{ $item->stock->customer->name }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
+                                            <td>{{ $item->remarks }}</td>
                                             <td>{{ $item->user->name }}</td>
                                             <td>{{ $item->date }}</td>
                                         </tr>

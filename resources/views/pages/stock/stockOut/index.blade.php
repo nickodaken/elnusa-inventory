@@ -67,7 +67,7 @@
                                         <form action="{{ route('keluar.delete', $item->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <a href="{{ route('keluar.detail', $item->id) }}" onclick="window.print();"
+                                            <a href="{{ route('keluar.detail', $item->id) }}"
                                                 class="btn
                                                 btn-sm btn-outline-primary">
                                                 <i class="bi bi-eye"></i>

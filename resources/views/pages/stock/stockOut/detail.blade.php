@@ -28,6 +28,7 @@
                                         <th scope="col">Nota</th>
                                         <th scope="col">Customer</th>
                                         <th scope="col" class="text-center">Jumlah</th>
+                                        <th scope="col">Keterangan</th>
                                         <th scope="col">Dibuat Oleh</th>
                                         <th scope="col">Tanggal</th>
                                     </tr>
@@ -38,6 +39,7 @@
                                             <td>{{ $data->bill_no }}</td>
                                             <td>{{ $data->customer->name }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
+                                            <td>{{ $item->remarks }}</td>
                                             <td>{{ $item->user->name }}</td>
                                             <td>{{ carbon\Carbon::parse($item->date)->format('d-M-Y') ?? '' }}</td>
                                         </tr>
