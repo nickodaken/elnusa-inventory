@@ -53,7 +53,7 @@
                     </tr>
                     <tr>
                         <td>ATTN</td>
-                        <td>:</td>
+                        <td>: {{ $data->attn }}</td>
                     </tr>
                 </table>
             </div>
@@ -64,23 +64,23 @@
                 <table class="table table-borderless">
                     <tr>
                         <td style="width:200px">VIA</td>
-                        <td>:</td>
+                        <td>: {{ $data->via }}</td>
                     </tr>
                     <tr>
                         <td>Carrier</td>
-                        <td>:</td>
+                        <td>: {{ $data->carrier }}</td>
                     </tr>
                     <tr>
                         <td>REFF</td>
-                        <td>:</td>
+                        <td>: {{ $data->reff }}</td>
                     </tr>
                     <tr>
                         <td>TRUCK NUM</td>
-                        <td>:</td>
+                        <td>: {{ $data->truck_no }}</td>
                     </tr>
                     <tr>
                         <td>DELIVERED BY</td>
-                        <td>:</td>
+                        <td>: {{ $data->delivered_by }}</td>
                     </tr>
                 </table>
             </div>
