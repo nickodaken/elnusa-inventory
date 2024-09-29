@@ -89,20 +89,25 @@
         <div class="mt-4">
             <table class="table">
                 <thead>
-                    <th scope="col">NO</th>
-                    <th scope="col" class="text-center">QTY</th>
-                    <th scope="col">UoM</th>
-                    <th scope="col">Nama Barang</th>
-                    <th scope="col">Remark</th>
+                    <tr>
+                        <th scope="col">NO</th>
+                        <th scope="col" class="text-center">QTY</th>
+                        <th scope="col">UoM</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Remark</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach ($data->detail as $key => $item)
-                        <td>{{ $key + 1 }}</td>
-                        <td class="text-center">{{ $item->qty }}</td>
-                        <td>{{ $item->barang->unit->name }}</td>
-                        <td>{{ $item->barang->name }}</td>
-                        <td>{{ $item->remarks }}</td>
-                        <td></td>
+                        <tr>
+
+                            <td>{{ $key + 1 }}</td>
+                            <td class="text-center">{{ $item->qty }}</td>
+                            <td>{{ $item->barang->unit->name }}</td>
+                            <td>{{ $item->barang->name }}</td>
+                            <td>{{ $item->remarks }}</td>
+                            <td></td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

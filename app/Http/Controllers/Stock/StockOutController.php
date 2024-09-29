@@ -99,6 +99,12 @@ class StockOutController extends Controller
                 $data->do_number = request()->do_number;
                 $data->user_id = Auth::id();
                 $data->date = Carbon::now();
+                $data->attn = request()->attn;
+                $data->via = request()->via;
+                $data->carrier = request()->carrier;
+                $data->reff = request()->reff;
+                $data->truck_no = request()->truck_no;
+                $data->delivered_by = request()->delivered_by;
                 $data->save();
 
 

@@ -18,7 +18,13 @@ class StockOut extends Model
         'customer_id',
         'user_id',
         'date',
-        'do_number'
+        'do_number',
+        'attn',
+        'via',
+        'carrier',
+        'reff',
+        'truck_no',
+        'delivered_by'
     ];
 
     public function customer(): BelongsTo

@@ -26,6 +26,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nota</th>
+                                        <th scope="col">Kode Barang</th>
+                                        <th scope="col">Nama Barang</th>
                                         <th scope="col">Supplier</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col">Keterangan</th>
@@ -37,6 +39,8 @@
                                     @foreach ($data->detail as $key => $item)
                                         <tr>
                                             <td>{{ $data->bill_no }}</td>
+                                            <td>{{ $item->barang->code }}</td>
+                                            <td>{{ $item->barang->name }}</td>
                                             <td>{{ $data->supplier->name }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td>{{ $item->remarks }}</td>

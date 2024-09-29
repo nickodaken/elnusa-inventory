@@ -1,12 +1,12 @@
 @extends('layouts.template.app')
 @section('content')
     <div class="pagetitle">
-        <h1>Form Stok Barang Keluar</h1>
+        <h1>Form Stock Out</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('keluar.index') }}">Data Stok Barang Keluar</a></li>
-                <li class="breadcrumb-item active">Tambah Data Stok Barang Keluar</li>
+                <li class="breadcrumb-item"><a href="{{ route('keluar.index') }}">Stock Out Data</a></li>
+                <li class="breadcrumb-item active">Add Stock Out Data</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -16,13 +16,13 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Tambah Data Stok Keluar </h5>
+                        <h5 class="card-title">Add Product </h5>
                         <form class="row g-3" action="{{ route('keluar.cart') }}" method="POST">
                             @csrf
                             <div class="col-md-12">
-                                <label class="form-label">Barang</label>
+                                <label class="form-label">Produck</label>
                                 <select id="product" name="barang_id" class="form-control select2" required>
-                                    <option value="" disabled selected>Pilih</option>
+                                    <option value="" disabled selected>Choose</option>
                                     @foreach ($datas as $item)
                                         <option value="{{ $item->id }}">
                                             {{ $item->code }} | {{ $item->name }}
@@ -31,23 +31,23 @@
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Nama Barang</label>
+                                <label class="form-label">Produck</label>
                                 <select id="name" name="" class="form-control">
-                                    <option value="" disabled>Pilih</option>
+                                    <option value="" disabled>Choose</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Stok</label>
+                                <label class="form-label">Stock</label>
                                 <select id="stock" name="" class="form-control">
-                                    <option value="" disabled>Pilih</option>
+                                    <option value="" disabled>Choose</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Jumlah</label>
+                                <label class="form-label">Qty</label>
                                 <input type="number" class="form-control" name="qty" value="1" required>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Keterangan</label>
+                                <label class="form-label">Remark</label>
                                 <input type="text" class="form-control" name="remarks">
                             </div>
 
@@ -61,18 +61,18 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">List Data Stok Barang Masuk</h5>
+                        <h5 class="card-title">Stock In</h5>
                         <div class="table-responsive">
                             <table id="table" class="table table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Kode Barang</th>
-                                        <th scope="col">Nama Barang</th>
-                                        <th scope="col">Nomor DO</th>
-                                        <th scope="col" class="text-center">Stok</th>
-                                        <th scope="col" class="text-center">Jumlah</th>
-                                        <th scope="col" class="text-center">Stok Aktual</th>
-                                        <th scope="col">Keterangan</th>
+                                        <th scope="col">Code Produck</th>
+                                        <th scope="col">Produck</th>
+                                        <th scope="col">DO No</th>
+                                        <th scope="col" class="text-center">Stock</th>
+                                        <th scope="col" class="text-center">Qty</th>
+                                        <th scope="col" class="text-center">Actual Stock</th>
+                                        <th scope="col">Remar</th>
                                         <th scope="col" class="text-center">#</th>
                                     </tr>
                                 </thead>
@@ -113,13 +113,13 @@
                         <form class="row g-3" action="{{ route('keluar.add') }}" method="POST">
                             @csrf
                             <div class="col-md-12">
-                                <label class="form-label">Nomor DO</label>
+                                <label class="form-label">DO No</label>
                                 <input type="text" class="form-control" name="do_number" required>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Customer</label>
-                                <select name="customer_id" class="form-control">
-                                    <option value="" disabled selected>Pilih</option>
+                                <select name="customer_id" class="form-control" required>
+                                    <option value="" disabled selected>Choose</option>
                                     @foreach ($customers as $item)
                                         <option value="{{ $item->id }}">
                                             {{ $item->name }}
@@ -127,7 +127,30 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="col-md-12">
+                                <label class="form-label">ATTN</label>
+                                <input type="text" class="form-control" name="attn">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Via</label>
+                                <input type="text" class="form-control" name="via">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Carrier</label>
+                                <input type="text" class="form-control" name="carrier">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Reff</label>
+                                <input type="text" class="form-control" name="reff">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Truck No</label>
+                                <input type="text" class="form-control" name="truck_no">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Delivered By</label>
+                                <input type="text" class="form-control" name="delivered_by">
+                            </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-outline-primary">Simpan</button>
                                 <a href="{{ route('barang.index') }}" class="btn btn-outline-danger">Batal</a>
