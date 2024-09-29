@@ -60,6 +60,12 @@
                                 <th scope="col">Pelanggan</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
+                                <th scope="col">ATTN</th>
+                                <th scope="col">Via</th>
+                                <th scope="col">Carrier</th>
+                                <th scope="col">Reff</th>
+                                <th scope="col">Nomor Truck</th>
+                                <th scope="col">Dikirim Oleh</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,6 +97,12 @@
                                     <td>{{ $item->customer->name }}</td>
                                     <td>{{ carbon\Carbon::parse($item->date)->format('d-M-Y') ?? '' }}</td>
                                     <td>{{ $item->user->name }}</td>
+                                    <td>{{ $item->attn }}</td>
+                                    <td>{{ $item->via }}</td>
+                                    <td>{{ $item->carrier }}</td>
+                                    <td>{{ $item->reff }}</td>
+                                    <td>{{ $item->truck_no }}</td>
+                                    <td>{{ $item->delivered_by }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
