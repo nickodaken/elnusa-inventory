@@ -15,10 +15,15 @@ use App\Http\Controllers\Stock\ReportController;
 use App\Http\Controllers\Stock\StockInController;
 use App\Http\Controllers\Stock\StockOutController;
 use App\Http\Controllers\UserController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('/login');
+});
+
+Route::get('test', function () {
+    return Carbon::now()->format('m');
 });
 
 Route::get('/dashboard', function () {
@@ -109,7 +114,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/barang/form/{id}', [BarangController::class, 'form'])->name('barang.edit');
     Route::post('/barang/form', [BarangController::class, 'store'])->name('barang.add');
     Route::post('/barang/form/{id}', [BarangController::class, 'store'])->name('barang.update');
-    Route::delete('/barang/{id}', [BarangController::class, 'delete'])->name('barang.delete');
+    Route::post('/barang/visible/{id}', [BarangController::class, 'visible'])->name('barang.visible');
 
     Route::prefix('/stok')->group(function () {
         /*

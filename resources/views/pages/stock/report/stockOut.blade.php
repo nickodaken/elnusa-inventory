@@ -58,6 +58,12 @@
                                 <th scope="col">Keterangan</th>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Dibuat Oleh</th>
+                                <th scope="col">ATTN</th>
+                                <th scope="col">Via</th>
+                                <th scope="col">Carrier</th>
+                                <th scope="col">Reff</th>
+                                <th scope="col">Truck No</th>
+                                <th scope="col">Delivered By</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,6 +78,12 @@
                                     <td>{{ $item->remarks }}</td>
                                     <td>{{ $item->date }}</td>
                                     <td>{{ $item->user->name }}</td>
+                                    <td>{{ $item->stock->attn }}</td>
+                                    <td>{{ $item->stock->via }}</td>
+                                    <td>{{ $item->stock->carrier }}</td>
+                                    <td>{{ $item->stock->reff }}</td>
+                                    <td>{{ $item->stock->truck_no }}</td>
+                                    <td>{{ $item->stock->delivered_by }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -19,7 +19,7 @@
 
 <body>
     <button class="bi bi-print" class="button button-hover" color: white;" href="javascript:void(0);"
-        onclick="printPageArea('printableArea')">Print</button>
+        onclick="printPageArea('print')">Print</button>
 
     <div id="printableArea">
         <div class="row">
@@ -27,7 +27,9 @@
                 <img src="{{ asset('img/logo-elnusa.png') }}" width="150" height="50">
             </div>
             <div class="col-6 p-4 text-right">
-                <h5> {{ $data->customer->address }}</h5>
+                <h5> Jl. Mulawarman No.91, Batakan, Kecamatan Balikpapan Selatan, Kota Balikpapan, Kalimantan
+                    Timur
+                    76116</h5>
             </div>
         </div>
         <div class="mt-4">
@@ -38,14 +40,21 @@
                 <table class="table table-borderless">
                     <tr>
                         <th>
-                            <h5>FROM</h5>
+                            <h5>FROM : {{ $data->delivered_by }}</h5>
                         </th>
                     </tr>
                     <tr>
+                        <th>
+                            <h5>TO :</h5>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>: {{ $data->customer->name }}</td>
+                    </tr>
+                    <tr>
                         <td>Address</td>
-                        <td>:Jl. Mulawarman No.91, Batakan, Kecamatan Balikpapan Selatan, Kota Balikpapan, Kalimantan
-                            Timur
-                            76116</td>
+                        <td>: {{ $data->customer->address }}</td>
                     </tr>
                     <tr>
                         <td>Date</td>
@@ -87,7 +96,7 @@
         </div>
 
         <div class="mt-4">
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">NO</th>
@@ -106,7 +115,6 @@
                             <td>{{ $item->barang->unit->name }}</td>
                             <td>{{ $item->barang->name }}</td>
                             <td>{{ $item->remarks }}</td>
-                            <td></td>
                         </tr>
                     @endforeach
                 </tbody>

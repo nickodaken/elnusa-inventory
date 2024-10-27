@@ -72,11 +72,26 @@ class BarangController extends Controller
         }
     }
 
-    public function delete($id)
+    public function visible($id)
     {
         $data = Barang::findOrFail($id);
-        $data->delete();
-        Alert::success('Berhasil', 'Data Barang Berhasil Dihapus');
+
+        $value = '';
+
+        switch ($data->is_visible) {
+            case true:
+                $value = false;
+                break;
+
+            case false:
+                $value = true;
+                break;
+        }
+
+        $data->is_visible = $value;
+        $data->save();
+
+        Alert::success('Berhasil', 'Data Barang Berhasil Diubah');
         return redirect()->back();
     }
 }

@@ -61,14 +61,13 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">List Data Stok Barang Masuk</h5>
+                        <h5 class="card-title">List Data Stok Barang Keluar</h5>
                         <div class="table-responsive">
                             <table id="table" class="table table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">Kode Barang</th>
                                         <th scope="col">Nama Barang</th>
-                                        <th scope="col">Nomor DO</th>
                                         <th scope="col" class="text-center">Stok</th>
                                         <th scope="col" class="text-center">Jumlah</th>
                                         <th scope="col" class="text-center">Stok Aktual</th>
@@ -81,7 +80,6 @@
                                         <tr>
                                             <td>{{ $item->barang->code }}</td>
                                             <td>{{ $item->barang->name }}</td>
-                                            <td>{{ $item->do_number }}</td>
                                             <td class="text-center">{{ $item->barang->stock }}</td>
                                             <td class="text-center">{{ $item->qty }}</td>
                                             <td class="text-center">{{ $item->barang->stock - $item->qty }}</td>
@@ -103,7 +101,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        @include('pages.stock.stockIn.cart.update')
+                                        @include('pages.stock.stockOut.cart.update')
                                     @endforeach
                                 </tbody>
                             </table>
@@ -112,10 +110,6 @@
                     <div class="card-body">
                         <form class="row g-3" action="{{ route('keluar.add') }}" method="POST">
                             @csrf
-                            <div class="col-md-12">
-                                <label class="form-label">Nomor DO</label>
-                                <input type="text" class="form-control" name="do_number" required>
-                            </div>
                             <div class="col-md-12">
                                 <label class="form-label">Pelanggan</label>
                                 <select name="customer_id" class="form-control" required>
@@ -153,7 +147,7 @@
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-outline-primary">Simpan</button>
-                                <a href="{{ route('barang.index') }}" class="btn btn-outline-danger">Batal</a>
+                                <a href="{{ route('keluar.index') }}" class="btn btn-outline-danger">Batal</a>
                             </div>
                         </form>
                     </div>

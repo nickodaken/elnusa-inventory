@@ -35,7 +35,7 @@ class StockInController extends Controller
 
     public function add()
     {
-        $datas = Barang::all();
+        $datas = Barang::where('is_visible', true)->get();
         $suppliers = Supplier::all();
         $carts = StockInDetail::where('user_id', Auth::id())->whereNull('stock_id')->get();
         return view('pages.stock.stockIn.add', compact(['datas', 'suppliers', 'carts']));

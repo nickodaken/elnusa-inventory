@@ -4,6 +4,7 @@ namespace App\Models\Stock;
 
 use App\Models\MasterData\Customer;
 use App\Models\User;
+use App\Traits\DoTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StockOut extends Model
 {
-    use HasFactory;
+    use HasFactory, DoTrait;
 
     protected $fillable = [
         'bill_no',

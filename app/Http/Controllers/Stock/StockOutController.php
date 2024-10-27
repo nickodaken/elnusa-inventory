@@ -36,7 +36,8 @@ class StockOutController extends Controller
 
     public function add()
     {
-        $datas = Barang::where('stock', '>', 0)->get();
+        $datas = Barang::where('is_visible', true)->where('stock', '>', 0)->get();
+
         $customers = Customer::all();
         $carts = StockOutDetail::where('user_id', Auth::id())->whereNull('stock_id')->get();
         return view('pages.stock.stockOut.add', compact(['datas', 'customers', 'carts']));
@@ -91,12 +92,11 @@ class StockOutController extends Controller
                 $total = sprintf("%03d", StockOut::whereYear('created_at', Carbon::now())->count() + 1);
                 $month = Carbon::now()->format('m');
                 $year = Carbon::now()->format('Y');
-                $billNo = $total . '/' . 'StockIn' . '/' . $month . '/' . $year;
+                $billNo = $total . '/' . 'StockOut' . '/' . $month . '/' . $year;
 
                 $data = new StockOut();
                 $data->bill_no = $billNo;
                 $data->customer_id = request()->customer_id;
-                $data->do_number = request()->do_number;
                 $data->user_id = Auth::id();
                 $data->date = Carbon::now();
                 $data->attn = request()->attn;

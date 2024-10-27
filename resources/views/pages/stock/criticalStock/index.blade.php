@@ -41,6 +41,10 @@
                                             <span class="badge bg-warning text-dark">
                                                 <i class="bi bi-exclamation-triangle me-1"></i> Stok Menipis
                                             </span>
+                                        @elseif ($item->stock <= 0)
+                                            <span class="badge bg-danger text-dark">
+                                                <i class="bi bi-exclamation-triangle me-1"></i> Stok Habis
+                                            </span>
                                         @else
                                             <span class="badge bg-danger">
                                                 <i class="bi bi-exclamation-octagon me-1"></i> Stok Menipis

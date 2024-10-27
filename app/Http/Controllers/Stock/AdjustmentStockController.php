@@ -34,7 +34,7 @@ class AdjustmentStockController extends Controller
 
     public function add()
     {
-        $datas = Barang::all();
+        $datas = Barang::where('is_visible', true)->get();
         $carts = AdjustmentDetailStock::where('user_id', Auth::id())->whereNull('adjustment_stock_id')->get();
         return view('pages.stock.adjustmentStock.add', compact(['datas', 'carts']));
     }

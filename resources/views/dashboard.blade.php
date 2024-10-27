@@ -18,7 +18,7 @@
             Carbon\Carbon::now(),
         ])->get();
 
-        $adjustments = StockOutDetail::whereBetween('date', [
+        $adjustments = AdjustmentDetailStock::whereBetween('date', [
             Carbon\Carbon::now()->startOfMonth(),
             Carbon\Carbon::now(),
         ])->get();

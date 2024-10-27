@@ -47,16 +47,18 @@
                                 <tr>
                                     <td class="text-center">
                                         @if (Auth::user()->roles_label[0] == 'SuperAdmin')
-                                            <form action="{{ route('barang.delete', $item->id) }}" method="post">
+                                            <form action="{{ route('barang.visible', $item->id) }}" method="post">
                                                 @csrf
-                                                @method('delete')
                                                 <a href="{{ route('barang.edit', $item->id) }}"
                                                     class="btn btn-sm btn-outline-info">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
-                                                <button type="submit" onclick="return confirm('Are you sure?')"
-                                                    class="btn btn-sm btn-outline-secondary">
-                                                    <i class="bi bi-trash"></i>
+                                                <button type="submit" class="btn btn-sm btn-outline-success">
+                                                    @if ($item->is_visible == true)
+                                                        <i class="bi bi-eye"></i> Terlihat
+                                                    @else
+                                                        <i class="bi bi-eye-slash"></i> Tidak Terlihat
+                                                    @endif
                                                 </button>
                                             </form>
                                         @endif
