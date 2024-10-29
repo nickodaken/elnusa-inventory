@@ -105,6 +105,7 @@ class StockOutController extends Controller
                 $data->reff = request()->reff;
                 $data->truck_no = request()->truck_no;
                 $data->delivered_by = request()->delivered_by;
+                $data->from = request()->from;
                 $data->save();
 
 

@@ -145,6 +145,10 @@
                                 <label class="form-label">Dikirim Oleh</label>
                                 <input type="text" class="form-control" name="delivered_by">
                             </div>
+                            <div class="col-md-12">
+                                <label class="form-label">From</label>
+                                <input type="text" class="form-control" name="from">
+                            </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-outline-primary">Simpan</button>
                                 <a href="{{ route('keluar.index') }}" class="btn btn-outline-danger">Batal</a>

@@ -4,7 +4,12 @@
 <head>
     <title>{{ $data->do_number }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
+        .page-break {
+            page-break-after: always;
+        }
+
         .button {
             transition-duration: 0.4s;
         }
@@ -14,6 +19,35 @@
             /* Green */
             color: white;
         }
+
+        @page {
+            margin: 100px 25px;
+        }
+
+        header {
+            position: fixed;
+            top: -60px;
+            left: 0px;
+            right: 0px;
+            background-color: lightblue;
+            height: 50px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 160px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+        }
+
+        p {
+            page-break-after: always;
+        }
+
+        p:last-child {
+            page-break-after: never;
+        }
     </style>
 </head>
 
@@ -21,35 +55,64 @@
     <button class="bi bi-print" class="button button-hover" color: white;" href="javascript:void(0);"
         onclick="printPageArea('print')">Print</button>
 
-    <div id="printableArea">
+    <div id="print" class="page-break">
+        <footer>
+            <div class="mt-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">PREPERED BY</th>
+                            <th scope="col" class="text-center">APPROVED BY</th>
+                            <th scope="col" class="text-center">USER PROJECT</th>
+                            <th scope="col" class="text-center">RECEIVED BY</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 100px">
+                        <tr style="height: 80px">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">{{ $data->user->name }}</th>
+                            <th scope="col" class="text-center"></th>
+                            <th scope="col" class="text-center"></th>
+                            <th scope="col" class="text-center"></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </footer>
         <div class="row">
             <div class="col-6 p-4 ">
                 <img src="{{ asset('img/logo-elnusa.png') }}" width="150" height="50">
             </div>
             <div class="col-6 p-4 text-right">
-                <h5> Jl. Mulawarman No.91, Batakan, Kecamatan Balikpapan Selatan, Kota Balikpapan, Kalimantan
+                <h6>
+                    Jl. Mulawarman No.91, Batakan, Kecamatan Balikpapan Selatan, Kota Balikpapan, Kalimantan
                     Timur
-                    76116</h5>
+                    76116
+                </h6>
+                <h5>
+                    DELIVERY ORDER <br> {{ $data->do_number }}
+                </h5>
             </div>
         </div>
         <div class="mt-4">
-            <h4 class="text-center">DELIVERY ORDER <br>{{ $data->do_number }}</h6>
+            <h4 class="text-right">
+                </h6>
         </div>
         <div class="row" class="mt-4">
             <div class="col-4">
                 <table class="table table-borderless">
                     <tr>
                         <th>
-                            <h5>FROM : {{ $data->delivered_by }}</h5>
+                            <h5>FROM : {{ $data->from }}</h5>
                         </th>
                     </tr>
                     <tr>
-                        <th>
-                            <h5>TO :</h5>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>Name</td>
+                        <td>TO</td>
                         <td>: {{ $data->customer->name }}</td>
                     </tr>
                     <tr>
@@ -99,9 +162,10 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">NO</th>
+                        <th scope="col" class="text-center">NO</th>
                         <th scope="col" class="text-center">QTY</th>
                         <th scope="col">UoM</th>
+                        <th scope="col">Kode Barang</th>
                         <th scope="col">Nama Barang</th>
                         <th scope="col">Remark</th>
                     </tr>
@@ -110,64 +174,14 @@
                     @foreach ($data->detail as $key => $item)
                         <tr>
 
-                            <td>{{ $key + 1 }}</td>
+                            <td class="text-center">{{ $key + 1 }}</td>
                             <td class="text-center">{{ $item->qty }}</td>
                             <td>{{ $item->barang->unit->name }}</td>
+                            <td>{{ $item->barang->code }}</td>
                             <td>{{ $item->barang->name }}</td>
                             <td>{{ $item->remarks }}</td>
                         </tr>
                     @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <div class="mt-4">
-            <table class="table table-borderless">
-                <thead>
-                    <tr>
-                        <th scope="col" class="text-center">PREPERED BY</th>
-                        <th scope="col" class="text-center">APPROVED BY</th>
-                        <th scope="col" class="text-center">USER PROJECT</th>
-                        <th scope="col" class="text-center">RECEIVED BY</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th scope="col" class="text-center">{{ $data->user->name }}</th>
-                        <th scope="col" class="text-center"></th>
-                        <th scope="col" class="text-center"></th>
-                        <th scope="col" class="text-center"></th>
-                    </tr>
                 </tbody>
             </table>
         </div>

@@ -25,7 +25,8 @@ class StockOut extends Model
         'carrier',
         'reff',
         'truck_no',
-        'delivered_by'
+        'delivered_by',
+        'from'
     ];
 
     public function customer(): BelongsTo
